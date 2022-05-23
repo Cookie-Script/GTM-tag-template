@@ -14,7 +14,6 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "CookieScript CMP (Consent Mode)",
-  "categories": ["TAG_MANAGEMENT", "PERSONALIZATION", "UTILITY"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -58,7 +57,7 @@ ___TEMPLATE_PARAMETERS___
     "subParams": [
       {
         "type": "SELECT",
-        "name": "defautconsent_ad_storage",
+        "name": "defaultconsent_ad_storage",
         "displayName": "ad_storage",
         "macrosInSelect": false,
         "selectItems": [
@@ -77,7 +76,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SELECT",
-        "name": "defautconsent_analytics_storage",
+        "name": "defaultconsent_analytics_storage",
         "displayName": "analytics_storage",
         "macrosInSelect": false,
         "selectItems": [
@@ -96,7 +95,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SELECT",
-        "name": "defautconsent_functionality_storage",
+        "name": "defaultconsent_functionality_storage",
         "displayName": "functionality_storage",
         "macrosInSelect": false,
         "selectItems": [
@@ -119,7 +118,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SELECT",
-        "name": "defautconsent_personalization_storage",
+        "name": "defaultconsent_personalization_storage",
         "displayName": "personalization_storage",
         "macrosInSelect": false,
         "selectItems": [
@@ -142,7 +141,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SELECT",
-        "name": "defautconsent_security_storage",
+        "name": "defaultconsent_security_storage",
         "displayName": "security_storage",
         "macrosInSelect": false,
         "selectItems": [
@@ -213,7 +212,13 @@ const encodeUriComponent = require('encodeUriComponent');
 const queryPermission = require('queryPermission');
 const setDefaultConsentState = require('setDefaultConsentState');
 const gtag = require('createArgumentsQueue')('gtag', 'dataLayer');
- 
+
+const updateConsentState = require('updateConsentState');
+const JSON = require('JSON');
+const decode = require('decodeUriComponent');
+const getCookieValues = require('getCookieValues');
+const Object = require('Object');
+
 let scriptSrc = data.script_src;
 
 //advanced settings
@@ -222,23 +227,62 @@ if (data.ads_data_redaction) gtag('set', 'ads_data_redaction', true);
 
 //default consent
 const defaultConsentState = {
-  'ad_storage': data.defautconsent_ad_storage,
-  'analytics_storage': data.defautconsent_analytics_storage,
+  'ad_storage': data.defaultconsent_ad_storage,
+  'analytics_storage': data.defaultconsent_analytics_storage,
+  'wait_for_update': 500,
 };
 
-if(data.defautconsent_functionality_storage !== 'ignore') {
-  defaultConsentState.functionality_storage = data.defautconsent_functionality_storage;
+if(data.defaultconsent_functionality_storage !== 'ignore') {
+  defaultConsentState.functionality_storage = data.defaultconsent_functionality_storage;
 }
 
-if(data.defautconsent_personalization_storage !== 'ignore') {
-  defaultConsentState.personalization_storage = data.defautconsent_personalization_storage;
+if(data.defaultconsent_personalization_storage !== 'ignore') {
+  defaultConsentState.personalization_storage = data.defaultconsent_personalization_storage;
 }
 
-if(data.defautconsent_security_storage !== 'ignore') {
-  defaultConsentState.security_storage = data.defautconsent_security_storage;
+if(data.defaultconsent_security_storage !== 'ignore') {
+  defaultConsentState.security_storage = data.defaultconsent_security_storage;
 }
 
 setDefaultConsentState(defaultConsentState);
+
+const cookieName = 'CookieScriptConsent';
+let cookieCategories = '';
+let cookieVal;
+let categories = [];
+
+if (queryPermission('get_cookies', cookieName)) {
+  cookieVal = getCookieValues(cookieName);
+  if (cookieVal && cookieVal.length > 0) {
+  	let consentCookie = cookieVal[0].toLowerCase();
+      consentCookie = decode(consentCookie);
+      consentCookie = JSON.parse(consentCookie);
+      if(consentCookie.action === 'accept') {
+        if(consentCookie.categories === undefined) {
+          cookieCategories = 'accept';
+        } else {
+          categories = consentCookie.categories;
+          categories = JSON.parse(categories);
+          cookieCategories = categories.join(',');
+        }
+      }
+
+    if(consentCookie.googleconsentmap && categories.length > 0) {
+        const updateState = {};
+        categories.forEach(function(category) {
+          Object.keys(consentCookie.googleconsentmap).forEach(function(key) {
+            const value = consentCookie.googleconsentmap[key];
+            if(value === category) {
+              updateState[key] = 'granted';
+            }
+          });
+        });
+        if(Object.keys(updateState).length > 0) {
+          updateConsentState(updateState);
+        }
+      }
+  }
+}
 
 if (queryPermission('inject_script', scriptSrc)) {
   injectScript(scriptSrc, data.gtmOnSuccess, data.gtmOnFailure);
@@ -583,6 +627,39 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "get_cookies",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "cookieAccess",
+          "value": {
+            "type": 1,
+            "string": "specific"
+          }
+        },
+        {
+          "key": "cookieNames",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "CookieScriptConsent"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
   }
 ]
 
@@ -594,6 +671,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 3/1/2022, 11:09:31 PM
+Created on 3/29/2022, 7:02:22 PM
 
 
