@@ -229,7 +229,7 @@ if (data.ads_data_redaction) gtag('set', 'ads_data_redaction', true);
 const defaultConsentState = {
   'ad_storage': data.defaultconsent_ad_storage,
   'analytics_storage': data.defaultconsent_analytics_storage,
-  'wait_for_update': 500,
+  'wait_for_update': data.wait_for_update,
 };
 
 if(data.defaultconsent_functionality_storage !== 'ignore') {
