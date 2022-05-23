@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: ed45ce27609863e04dfc3373b2db80d1756e10bf
+    changeNotes: Taking wait_for_update from the settings
   - sha: 1e6999c771b01c6274ef462cafbc237961705468
     changeNotes: Added wait_for_update
   - sha: 77b370e5c1eae9e1895953ce6c45afad4cb3c846
