@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: aa52c816e0487035112f46ee9a34d45e7a506438
+    changeNotes: Added regional specific default settings, added developer ID
   - sha: ed45ce27609863e04dfc3373b2db80d1756e10bf
     changeNotes: Taking wait_for_update from the settings
   - sha: 1e6999c771b01c6274ef462cafbc237961705468
