@@ -1,12 +1,4 @@
-___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "TAG",
@@ -52,14 +44,14 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "GROUP",
     "name": "defaultconsent",
-    "displayName": "Default Consent",
+    "displayName": "Default Consent (Global)",
     "groupStyle": "ZIPPY_OPEN",
     "subParams": [
       {
         "type": "SELECT",
         "name": "defaultconsent_ad_storage",
-        "displayName": "ad_storage",
-        "macrosInSelect": false,
+        "displayName": "Advertisement Cookies [ad_storage]",
+        "macrosInSelect": true,
         "selectItems": [
           {
             "value": "denied",
@@ -77,8 +69,8 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "defaultconsent_analytics_storage",
-        "displayName": "analytics_storage",
-        "macrosInSelect": false,
+        "displayName": "Analytics Cookies [analytics_storage]",
+        "macrosInSelect": true,
         "selectItems": [
           {
             "value": "denied",
@@ -96,8 +88,8 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "defaultconsent_functionality_storage",
-        "displayName": "functionality_storage",
-        "macrosInSelect": false,
+        "displayName": "Functional Cookies (functionality_storage)",
+        "macrosInSelect": true,
         "selectItems": [
           {
             "value": "denied",
@@ -119,8 +111,8 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "defaultconsent_personalization_storage",
-        "displayName": "personalization_storage",
-        "macrosInSelect": false,
+        "displayName": "Personalization Cookies [personalization_storage]",
+        "macrosInSelect": true,
         "selectItems": [
           {
             "value": "denied",
@@ -142,8 +134,8 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "defaultconsent_security_storage",
-        "displayName": "security_storage",
-        "macrosInSelect": false,
+        "displayName": "Security cookies [security_storage]",
+        "macrosInSelect": true,
         "selectItems": [
           {
             "value": "granted",
@@ -182,6 +174,161 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
+    "name": "regionconsentgroup",
+    "displayName": "Default Consent (Region-specific)",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "PARAM_TABLE",
+        "name": "regionconsent",
+        "displayName": "",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "regionconsent_ad_storage",
+              "displayName": "Advertisement Cookies [ad_storage]",
+              "macrosInSelect": true,
+              "selectItems": [
+                {
+                  "value": "denied",
+                  "displayValue": "Denied"
+                },
+                {
+                  "value": "granted",
+                  "displayValue": "Granted"
+                }
+              ],
+              "simpleValueType": true,
+              "help": "Enables storage (such as cookies) related to advertising"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "regionconsent_analytics_storage",
+              "displayName": "Analytics Cookies [analytics_storage]",
+              "macrosInSelect": true,
+              "selectItems": [
+                {
+                  "value": "denied",
+                  "displayValue": "Denied"
+                },
+                {
+                  "value": "granted",
+                  "displayValue": "Granted"
+                }
+              ],
+              "simpleValueType": true,
+              "help": "Enables storage (such as cookies) related to analytics e.g. visit duration"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "regionconsent_functionality_storage",
+              "displayName": "Functional Cookies [functionality_storage]",
+              "macrosInSelect": true,
+              "selectItems": [
+                {
+                  "value": "denied",
+                  "displayValue": "Denied"
+                },
+                {
+                  "value": "granted",
+                  "displayValue": "Granted"
+                },
+                {
+                  "value": "ignore",
+                  "displayValue": "Ignore"
+                }
+              ],
+              "simpleValueType": true,
+              "help": "Enables storage that supports the functionality of the website or app e.g. language settings"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "regionconsent_personalization_storage",
+              "displayName": "Personalization Cookies [personalization_storage]",
+              "macrosInSelect": true,
+              "selectItems": [
+                {
+                  "value": "denied",
+                  "displayValue": "Denied"
+                },
+                {
+                  "value": "granted",
+                  "displayValue": "Granted"
+                },
+                {
+                  "value": "ignore",
+                  "displayValue": "Ignore"
+                }
+              ],
+              "simpleValueType": true,
+              "help": "Enables storage related to personalization e.g. video recommendations"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "regionconsent_security_storage",
+              "displayName": "Security cookies [security_storage]",
+              "macrosInSelect": true,
+              "selectItems": [
+                {
+                  "value": "granted",
+                  "displayValue": "Granted"
+                },
+                {
+                  "value": "denied",
+                  "displayValue": "Denied"
+                },
+                {
+                  "value": "ignore",
+                  "displayValue": "Ignore"
+                }
+              ],
+              "simpleValueType": true,
+              "help": "Enables storage related to security such as authentication functionality, fraud prevention, and other user protection"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "region",
+              "displayName": "Regions",
+              "simpleValueType": true,
+              "help": "A comma-separated array of region codes specifying which region the consent settings apply to. Region codes are expressed using country and/or subdivisions in \u003ca href\u003d\"https://en.wikipedia.org/wiki/ISO_3166-2\"\u003eISO 3166-2\u003c/a\u003e format, ex: US-CA",
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                },
+                {
+                  "type": "REGEX",
+                  "args": [
+                    "(?i)^\\s*([a-z]{2}(-[a-z0-9]{1,3})?\\s*)(,\\s*[a-z]{2}(-[a-z0-9]{1,3})?\\s*)*$"
+                  ],
+                  "errorMessage": "Invalid format, valid example: US-CA,LT,DA"
+                }
+              ]
+            },
+            "isUnique": false
+          }
+        ],
+        "newRowButtonText": "Add region"
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
     "name": "other",
     "displayName": "Other Settings",
     "groupStyle": "ZIPPY_CLOSED",
@@ -189,14 +336,14 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "CHECKBOX",
         "name": "url_passthrough",
-        "checkboxText": "Pass Ad Click information through URLs [ ads_data_redaction ]",
+        "checkboxText": "Pass Ad Click information through URLs [ads_data_redaction]",
         "simpleValueType": true,
         "help": "Check this if you want internal links to pass advertising identifiers (\u003cstrong\u003egclid\u003c/strong\u003e, \u003cstrong\u003edclid\u003c/strong\u003e, \u003cstrong\u003egclsrc\u003c/strong\u003e, \u003cstrong\u003e_gl\u003c/strong\u003e) in the link URL while waiting for consent to be granted."
       },
       {
         "type": "CHECKBOX",
         "name": "ads_data_redaction",
-        "checkboxText": "Redact Ads Data [ ads_data_redaction ]",
+        "checkboxText": "Redact Ads Data [ads_data_redaction]",
         "simpleValueType": true,
         "help": "If this is checked \u003cstrong\u003eand\u003c/strong\u003e Advertising consent status is \u003cstrong\u003edenied\u003c/strong\u003e, Google\u0027s advertising tags will drop all advertising identifiers from the requests, and traffic will be routed through cookieless domains."
       }
@@ -208,7 +355,6 @@ ___TEMPLATE_PARAMETERS___
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 const injectScript = require('injectScript');
-const encodeUriComponent = require('encodeUriComponent');
 const queryPermission = require('queryPermission');
 const setDefaultConsentState = require('setDefaultConsentState');
 const gtagSet = require("gtagSet");
@@ -220,6 +366,7 @@ const getCookieValues = require('getCookieValues');
 const Object = require('Object');
 
 let scriptSrc = data.script_src;
+const regionConsents = data.regionconsent || [];
 
 //advanced settings
 gtagSet({
@@ -228,11 +375,11 @@ gtagSet({
   "developer_id.dMmY1Mm": true,
 });
 
-//default consent
+//default consent - Global
 const defaultConsentState = {
-  'ad_storage': data.defaultconsent_ad_storage,
-  'analytics_storage': data.defaultconsent_analytics_storage,
-  'wait_for_update': data.wait_for_update,
+  ad_storage: data.defaultconsent_ad_storage,
+  analytics_storage: data.defaultconsent_analytics_storage,
+  wait_for_update: data.wait_for_update,
 };
 
 if(data.defaultconsent_functionality_storage !== 'ignore') {
@@ -249,6 +396,38 @@ if(data.defaultconsent_security_storage !== 'ignore') {
 
 setDefaultConsentState(defaultConsentState);
 
+//Region specific
+for (let index = 0; index < regionConsents.length; index++) {
+  const regionConsent = regionConsents[index];
+  const currentRegions = regionConsent.region
+  .split(",")
+  .map((region) => region.trim())
+  .filter((region) => region);
+
+  const consentRegionData = {
+    ad_storage: regionConsent.regionconsent_ad_storage,
+    analytics_storage: regionConsent.regionconsent_analytics_storage,
+    region: currentRegions,
+    wait_for_update: data.wait_for_update
+  };
+
+  if(regionConsent.regionconsent_functionality_storage !== 'ignore') {
+    consentRegionData.functionality_storage = regionConsent.regionconsent_functionality_storage;
+  }
+  
+  if(regionConsent.regionconsent_personalization_storage !== 'ignore') {
+    consentRegionData.personalization_storage = regionConsent.regionconsent_personalization_storage;
+  }
+  
+  if(regionConsent.regionconsent_security_storage!== 'ignore') {
+    consentRegionData.security_storage = regionConsent.regionconsent_security_storage;
+  }
+  setDefaultConsentState(consentRegionData);
+}
+
+
+
+//update if user has already selected 
 const cookieName = 'CookieScriptConsent';
 let cookieCategories = '';
 let cookieVal;
@@ -570,7 +749,31 @@ ___WEB_PERMISSIONS___
         "publicId": "write_data_layer",
         "versionId": "1"
       },
-      "param": []
+      "param": [
+        {
+          "key": "keyPatterns",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "ads_data_redaction"
+              },
+              {
+                "type": 1,
+                "string": "url_passthrough"
+              },
+              {
+                "type": 1,
+                "string": "developer_id.dMmY1Mm"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
     },
     "isRequired": true
   }
@@ -585,3 +788,5 @@ scenarios: []
 ___NOTES___
 
 Created on 3/29/2022, 7:02:22 PM
+
+
