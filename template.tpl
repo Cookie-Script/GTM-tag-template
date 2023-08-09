@@ -437,7 +437,6 @@ for (let index = 0; index < regionConsents.length; index++) {
 
 //update if user has already selected 
 const cookieName = 'CookieScriptConsent';
-let cookieCategories = '';
 let cookieVal;
 let categories = [];
 
@@ -445,32 +444,39 @@ if (queryPermission('get_cookies', cookieName)) {
   cookieVal = getCookieValues(cookieName);
   if (cookieVal && cookieVal.length > 0) {
   	let consentCookie = cookieVal[0].toLowerCase();
-      consentCookie = decode(consentCookie);
-      consentCookie = JSON.parse(consentCookie);
+    consentCookie = decode(consentCookie);
+    consentCookie = JSON.parse(consentCookie);
+    const updateState = {};
+    if(consentCookie.googleconsentmap) {
+      Object.keys(consentCookie.googleconsentmap).forEach(function(key) {
+        const value = consentCookie.googleconsentmap[key];
+        if(value !== 'ignore') {
+          updateState[key] = 'denied';
+        }
+      });
       if(consentCookie.action === 'accept') {
-        if(consentCookie.categories === undefined) {
-          cookieCategories = 'accept';
-        } else {
+        if(consentCookie.categories !== undefined) {
           categories = consentCookie.categories;
           categories = JSON.parse(categories);
-          cookieCategories = categories.join(',');
         }
-      }
-
-    if(consentCookie.googleconsentmap && categories.length > 0) {
-        const updateState = {};
-        categories.forEach(function(category) {
-          Object.keys(consentCookie.googleconsentmap).forEach(function(key) {
-            const value = consentCookie.googleconsentmap[key];
-            if(value === category) {
+        if(categories.length > 0) {
+          categories.forEach(function(category) {
+            Object.keys(updateState).forEach(function(key) {
+              const value = consentCookie.googleconsentmap[key];
+              if(value === category) {
+                updateState[key] = 'granted';
+              }
+            });
+          }); 
+        } else {
+           Object.keys(updateState).forEach(function(key) {
               updateState[key] = 'granted';
-            }
-          });
-        });
-        if(Object.keys(updateState).length > 0) {
-          updateConsentState(updateState);
-        }
+            });
+        }         
       }
+      
+      updateConsentState(updateState);
+    }
   }
 }
 
