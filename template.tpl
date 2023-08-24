@@ -96,7 +96,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "defaultconsent_functionality_storage",
-        "displayName": "Functional Cookies (functionality_storage)",
+        "displayName": "Functional Cookies [functionality_storage]",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -447,7 +447,7 @@ if (queryPermission('get_cookies', cookieName)) {
     consentCookie = decode(consentCookie);
     consentCookie = JSON.parse(consentCookie);
     const updateState = {};
-    if(consentCookie.googleconsentmap) {
+    if(consentCookie.googleconsentmap && consentCookie.action) {
       Object.keys(consentCookie.googleconsentmap).forEach(function(key) {
         const value = consentCookie.googleconsentmap[key];
         if(value !== 'ignore') {
