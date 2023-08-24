@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: b8ef22f206cf212079f7c720a97af1340f71cdc2
+    changeNotes: Adjusted banner logic after the first load
   - sha: 84638d1704035315367f26798f859595c0d89de7
     changeNotes: Updated how decline is handled on consent init
   - sha: 136b4f56bf1576af169baec3e6224ca32112f0ae
