@@ -344,7 +344,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "CHECKBOX",
         "name": "url_passthrough",
-        "checkboxText": "Pass Ad Click information through URLs [ads_data_redaction]",
+        "checkboxText": "Pass Ad Click information through URLs [url_passthrough]",
         "simpleValueType": true,
         "help": "Check this if you want internal links to pass advertising identifiers (\u003cstrong\u003egclid\u003c/strong\u003e, \u003cstrong\u003edclid\u003c/strong\u003e, \u003cstrong\u003egclsrc\u003c/strong\u003e, \u003cstrong\u003e_gl\u003c/strong\u003e) in the link URL while waiting for consent to be granted."
       },
