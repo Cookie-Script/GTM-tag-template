@@ -76,6 +76,44 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SELECT",
+        "name": "defaultconsent_ad_user_data",
+        "displayName": "Advertisement User Data [ad_user_data]",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": "denied",
+            "displayValue": "Denied"
+          },
+          {
+            "value": "granted",
+            "displayValue": "Granted"
+          }
+        ],
+        "simpleValueType": true,
+        "defaultValue": "denied",
+        "help": "Sets consent for sending user data to Google for advertising purposes."
+      },
+      {
+        "type": "SELECT",
+        "name": "defaultconsent_ad_personalization",
+        "displayName": "Advertisement Personalization [ad_personalization]",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": "denied",
+            "displayValue": "Denied"
+          },
+          {
+            "value": "granted",
+            "displayValue": "Granted"
+          }
+        ],
+        "simpleValueType": true,
+        "defaultValue": "denied",
+        "help": "Controls whether data can be used for ads personalization (eg. remarketing)"
+      },
+      {
+        "type": "SELECT",
         "name": "defaultconsent_analytics_storage",
         "displayName": "Analytics Cookies [analytics_storage]",
         "macrosInSelect": true,
@@ -209,6 +247,48 @@ ___TEMPLATE_PARAMETERS___
               ],
               "simpleValueType": true,
               "help": "Enables storage (such as cookies) related to advertising"
+            },
+            "isUnique": false
+          },
+		  {
+            "param": {
+              "type": "SELECT",
+              "name": "regionconsent_ad_user_data",
+              "displayName": "Advertisement User Data [ad_user_data]",
+              "macrosInSelect": true,
+              "selectItems": [
+                {
+                  "value": "denied",
+                  "displayValue": "Denied"
+                },
+                {
+                  "value": "granted",
+                  "displayValue": "Granted"
+                }
+              ],
+              "simpleValueType": true,
+              "help": "Sets consent for sending user data to Google for advertising purposes."
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "regionconsent_ad_personalization",
+              "displayName": "Advertisement Personalization [ad_personalization]",
+              "macrosInSelect": true,
+              "selectItems": [
+                {
+                  "value": "denied",
+                  "displayValue": "Denied"
+                },
+                {
+                  "value": "granted",
+                  "displayValue": "Granted"
+                }
+              ],
+              "simpleValueType": true,
+              "help": "Controls whether data can be used for ads personalization (eg. remarketing)"
             },
             "isUnique": false
           },
@@ -387,6 +467,8 @@ gtagSet({
 const defaultConsentState = {
   ad_storage: data.defaultconsent_ad_storage,
   analytics_storage: data.defaultconsent_analytics_storage,
+  ad_user_data: data.defaultconsent_ad_user_data,
+  ad_personalization: data.defaultconsent_ad_personalization,
   wait_for_update: data.wait_for_update,
 };
 
@@ -415,6 +497,8 @@ for (let index = 0; index < regionConsents.length; index++) {
   const consentRegionData = {
     ad_storage: regionConsent.regionconsent_ad_storage,
     analytics_storage: regionConsent.regionconsent_analytics_storage,
+    ad_user_data: regionConsent.regionconsent_ad_user_data,
+    ad_personalization: regionConsent.regionconsent_ad_personalization,
     region: currentRegions,
     wait_for_update: data.wait_for_update
   };
