@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: 7c6e493889dc154afb3aa2e7a533aa282236d487
+    changeNotes: Updated terms of service for ad_user_data and ad_personalization
   - sha: a3543a304f0e4e41f778aab0bc6948f9b9fc460d
     changeNotes: Added accesses consent states for ad_user_data and ad_personalization
   - sha: ec44f5db785a56b136b62856e18cb049f2249f11
