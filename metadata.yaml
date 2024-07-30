@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: 34e1b4c036071bfc32dbd1903d49b723b671c4da
+    changeNotes: Changed GTM validator global variable
   - sha: e43f36276d5c89597037dd3d7064e9c76e1d424d
     changeNotes: Added GTM validator code
   - sha: 7c6e493889dc154afb3aa2e7a533aa282236d487
