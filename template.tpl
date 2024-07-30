@@ -565,22 +565,19 @@ if (queryPermission('get_cookies', cookieName)) {
   }
 }
 
-function onSuccess() {
-  if (
-    queryPermission('access_globals', 'readwrite', 'CookieScript.useGoogleTemplate') && 
-    queryPermission('access_globals', 'readwrite', 'CookieScript.isVerifyGoogleConsentMode')
-  )
-  {
-    const validTrigger = data.gtmEventId === -1;
-    setInWindow('CookieScript.useGoogleTemplate', true, true);
-    setInWindow('CookieScript.isVerifyGoogleConsentMode', validTrigger, true);
-  }
-  data.gtmOnSuccess();
+
+if (queryPermission('access_globals', 'readwrite', 'CookieScriptData'))
+{
+  const validTrigger = data.gtmEventId === -1;
+  setInWindow('CookieScriptData', {
+    useGoogleTemplate: true,
+    isVerifyGoogleConsentMode: validTrigger
+  }, true);
 }
 
 
 if (queryPermission('inject_script', scriptSrc)) {
-  injectScript(scriptSrc, onSuccess, data.gtmOnFailure);
+  injectScript(scriptSrc, data.gtmOnSuccess(), data.gtmOnFailure);
 } else {
   data.gtmOnFailure();
 }
@@ -987,46 +984,7 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "CookieScript.useGoogleTemplate"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "CookieScript.isVerifyGoogleConsentMode"
+                    "string": "CookieScriptData"
                   },
                   {
                     "type": 8,
