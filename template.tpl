@@ -452,6 +452,7 @@ const JSON = require('JSON');
 const decode = require('decodeUriComponent');
 const getCookieValues = require('getCookieValues');
 const Object = require('Object');
+const setInWindow = require('setInWindow');
 
 let scriptSrc = data.script_src;
 const regionConsents = data.regionconsent || [];
@@ -564,8 +565,22 @@ if (queryPermission('get_cookies', cookieName)) {
   }
 }
 
+function onSuccess() {
+  if (
+    queryPermission('access_globals', 'readwrite', 'CookieScript.useGoogleTemplate') && 
+    queryPermission('access_globals', 'readwrite', 'CookieScript.isVerifyGoogleConsentMode')
+  )
+  {
+    const validTrigger = data.gtmEventId === -1;
+    setInWindow('CookieScript.useGoogleTemplate', true, true);
+    setInWindow('CookieScript.isVerifyGoogleConsentMode', validTrigger, true);
+  }
+  data.gtmOnSuccess();
+}
+
+
 if (queryPermission('inject_script', scriptSrc)) {
-  injectScript(scriptSrc, data.gtmOnSuccess, data.gtmOnFailure);
+  injectScript(scriptSrc, onSuccess, data.gtmOnFailure);
 } else {
   data.gtmOnFailure();
 }
@@ -926,6 +941,106 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "developer_id.dMmY1Mm"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "access_globals",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "keys",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "CookieScript.useGoogleTemplate"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "CookieScript.isVerifyGoogleConsentMode"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
               }
             ]
           }
