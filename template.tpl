@@ -50,6 +50,13 @@ ___TEMPLATE_PARAMETERS___
     "valueHint": "Your CookieScript banner script URL"
   },
   {
+    "type": "CHECKBOX",
+    "name": "iab_stub_enablead",
+    "checkboxText": "Enable IAB TCF 2.2 integration",
+    "simpleValueType": true,
+    "help": "Preload IAB TCF files if you\u0027re having problems with ADs on your site. \u003ca href\u003d\"https://help.cookie-script.com/en/google-tag-manager/enable-iab-tcf\" target\u003d\"_blank\"\u003eRead more\u003c/a\u003e"
+  },
+  {
     "type": "GROUP",
     "name": "defaultconsent",
     "displayName": "Default Consent (Global)",
@@ -573,6 +580,13 @@ if (queryPermission('access_globals', 'readwrite', 'CookieScriptData'))
     useGoogleTemplate: true,
     isVerifyGoogleConsentMode: validTrigger
   }, true);
+}
+
+//Include IAB stabs if IAB is enabled
+if(data.iab_stub_enablead) {
+  if (queryPermission('inject_script', scriptSrc)) {
+     injectScript('https://cookie-script.com/iabtcf/2.2/iab_stub.js', data.gtmOnSuccess(), data.gtmOnFailure);
+  }
 }
 
 
