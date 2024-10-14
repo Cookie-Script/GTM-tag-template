@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: ea5166aec745381f5bdea754a4149d18bcc04f87
+    changeNotes: Added IAB stubs inclusion before banner code
   - sha: 34e1b4c036071bfc32dbd1903d49b723b671c4da
     changeNotes: Changed GTM validator global variable
   - sha: e43f36276d5c89597037dd3d7064e9c76e1d424d
