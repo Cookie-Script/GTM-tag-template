@@ -575,7 +575,7 @@ if (queryPermission('get_cookies', cookieName)) {
 
 if (queryPermission('access_globals', 'readwrite', 'CookieScriptData'))
 {
-  const validTrigger = data.gtmEventId === -1;
+  const validTrigger = data.gtmEventId === 1;
   setInWindow('CookieScriptData', {
     useGoogleTemplate: true,
     isVerifyGoogleConsentMode: validTrigger
