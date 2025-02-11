@@ -545,6 +545,9 @@ if (queryPermission('get_cookies', cookieName)) {
         if(value !== 'ignore') {
           updateState[key] = 'denied';
         }
+        if(value === 'strict') {
+          updateState[key] = 'granted';
+        }
       });
       if(consentCookie.action === 'accept') {
         if(consentCookie.categories !== undefined) {
