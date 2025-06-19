@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: 37f65f73d42cc538013d91b4674faea44d7f64f4
+    changeNotes: changed default state firing order + improved event detection code
   - sha: aa014c6f77f8fe360f55dd7bdfbb78d4d20ce3f0
     changeNotes: Added support for strict category
   - sha: 3a8ddad4aab8d7e0114c0908e58ac927ed085842
