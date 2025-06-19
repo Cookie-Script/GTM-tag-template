@@ -460,6 +460,7 @@ const decode = require('decodeUriComponent');
 const getCookieValues = require('getCookieValues');
 const Object = require('Object');
 const setInWindow = require('setInWindow');
+const copyFromDataLayer = require('copyFromDataLayer');
 
 let scriptSrc = data.script_src;
 const regionConsents = data.regionconsent || [];
@@ -492,8 +493,6 @@ if(data.defaultconsent_security_storage !== 'ignore') {
   defaultConsentState.security_storage = data.defaultconsent_security_storage;
 }
 
-setDefaultConsentState(defaultConsentState);
-
 //Region specific
 for (let index = 0; index < regionConsents.length; index++) {
   const regionConsent = regionConsents[index];
@@ -524,6 +523,9 @@ for (let index = 0; index < regionConsents.length; index++) {
   }
   setDefaultConsentState(consentRegionData);
 }
+
+//Set global default
+setDefaultConsentState(defaultConsentState);
 
 
 
@@ -578,7 +580,8 @@ if (queryPermission('get_cookies', cookieName)) {
 
 if (queryPermission('access_globals', 'readwrite', 'CookieScriptData'))
 {
-  const validTrigger = data.gtmEventId === 1;
+  const eventName = copyFromDataLayer('event');
+  const validTrigger = eventName === 'gtm.init_consent';
   setInWindow('CookieScriptData', {
     useGoogleTemplate: true,
     isVerifyGoogleConsentMode: validTrigger
@@ -1016,6 +1019,39 @@ ___WEB_PERMISSIONS___
                     "boolean": true
                   }
                 ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "read_data_layer",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "allowedKeys",
+          "value": {
+            "type": 1,
+            "string": "specific"
+          }
+        },
+        {
+          "key": "keyPatterns",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "event"
               }
             ]
           }
