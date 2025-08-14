@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: 9c4e1c393df7e5528468ac052ee67ebf6131288a
+    changeNotes: added detailed reasons for Consent Mode Validation  
   - sha: 37f65f73d42cc538013d91b4674faea44d7f64f4
     changeNotes: changed default state firing order + improved event detection code
   - sha: aa014c6f77f8fe360f55dd7bdfbb78d4d20ce3f0
