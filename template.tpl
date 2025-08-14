@@ -10,9 +10,8 @@ ___INFO___
 
 {
   "type": "TAG",
-  "id": "cvt_temp_public_id",
+  "id": "cvt_PLWDP",
   "version": 1,
-  "securityGroups": [],
   "displayName": "CookieScript CMP (Consent Mode)",
   "brand": {
     "id": "github.com_Cookie-Script",
@@ -22,7 +21,8 @@ ___INFO___
   "description": "CookieScript is a Consent Management Platform that helps you comply with privacy regulations. This template is designed to properly integrate the CookieScript banner in GTM with Consent Mode support",
   "containerContexts": [
     "WEB"
-  ]
+  ],
+  "securityGroups": []
 }
 
 
@@ -584,6 +584,10 @@ if (queryPermission('access_globals', 'readwrite', 'CookieScriptData'))
   const validTrigger = eventName === 'gtm.init_consent';
   setInWindow('CookieScriptData', {
     useGoogleTemplate: true,
+    correctGoogleTemplateTrigger: validTrigger,
+    gtagRequiredCategory: null,
+    gtagCorrectOrder: null,
+    gtagDefaultConsent: null,
     isVerifyGoogleConsentMode: validTrigger
   }, true);
 }
