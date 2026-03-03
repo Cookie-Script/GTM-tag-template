@@ -595,7 +595,7 @@ if (queryPermission('access_globals', 'readwrite', 'CookieScriptData'))
 //Include IAB stubs if IAB is enabled
 if(!!data.iab_stub_enablead) {
   if (queryPermission('inject_script', scriptSrc)) {
-     injectScript('https://cookie-script.com/iabtcf/2.2/iab_stub.js', data.gtmOnSuccess(), data.gtmOnFailure);
+     injectScript('https://cdn.cookie-script.com/iabtcf/2.3/iab_stub.js', data.gtmOnSuccess(), data.gtmOnFailure);
   }
 }
 
