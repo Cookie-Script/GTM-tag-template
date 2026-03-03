@@ -1,7 +1,9 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
-  - sha: 9c4e1c393df7e5528468ac052ee67ebf6131288a
+  - sha: 8530be822c0ebeb2e303d5e32212be10e8186ad1
+    changeNotes: Updated IAB TCF stub URL
+  - sha: 9c4e1c393df7e5528468ac052ee67ebf6131288a  
     changeNotes: added detailed reasons for Consent Mode Validation  
   - sha: 37f65f73d42cc538013d91b4674faea44d7f64f4
     changeNotes: changed default state firing order + improved event detection code
