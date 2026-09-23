@@ -1,6 +1,8 @@
 homepage: "https://cookie-script.com"
 documentation: "https://support.cookie-script.com/article/88-Deploy-CookieScript-with-Google-Tag-Manager"
 versions:
+  - sha: 7984cdcdf1aa3c489fd522bf44bec7c2fa1ee12d
+    changeNotes: Fixed category parsing for new banner
   - sha: 12ed50c2a40d5c23d23acf7040bcceb7e49136d0
     changeNotes: Added support for staging domains
   - sha: 8530be822c0ebeb2e303d5e32212be10e8186ad1
