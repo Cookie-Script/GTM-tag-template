@@ -456,6 +456,7 @@ const gtagSet = require("gtagSet");
 
 const updateConsentState = require('updateConsentState');
 const JSON = require('JSON');
+const getType = require('getType');
 const decode = require('decodeUriComponent');
 const getCookieValues = require('getCookieValues');
 const Object = require('Object');
@@ -554,7 +555,9 @@ if (queryPermission('get_cookies', cookieName)) {
       if(consentCookie.action === 'accept') {
         if(consentCookie.categories !== undefined) {
           categories = consentCookie.categories;
-          categories = JSON.parse(categories);
+          if (getType(categories) !== 'array') {
+            categories = JSON.parse(categories);
+          }
         }
         if(categories.length > 0) {
           categories.forEach(function(category) {
