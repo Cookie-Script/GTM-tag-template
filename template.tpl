@@ -43,7 +43,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "REGEX",
         "args": [
-          "https:\\/\\/(cdn|eu|ca|ca-eu|geo)\\.cookie-script.com\\/s\\/[0-9|a-f]{32}\\.js([\\?\u0026](region|country|state)\u003d[a-z/-]*)*"
+          "https:\\/\\/(cdn|eu|ca|ca-eu|geo)\\.cookie-script.com\\/(s|staging)\\/[0-9|a-f]{32}\\.js([\\?\u0026](region|country|state)\u003d[a-z/-]*)*"
         ]
       }
     ],
